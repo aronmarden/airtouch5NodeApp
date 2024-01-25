@@ -1,0 +1,20 @@
+# security
+**/*.ssh
+**/*.ignore
+**/*backend/nr-security-home*
+**/key.json
+**/*.zip
+
+# misc
+**/*.DS_Store
+**/*.env.local
+**/*.env.development.local
+**/*.env.test.local
+**/*.env.production.local
+**/*.idea
+**/*.log
+**/node_modules
+**/package-lock.json
+**/yarn.lock
+**/build
+.ignoredir/syntheticscript.js
