@@ -1,47 +1,24 @@
-Information that can be queried:
+# AirTouch 5 Node.js Application
 
-Zone Status (Message Type 0x21):
+This application communicates with an AirTouch 5 device and posts the data to New Relic.
 
-Zone power state (On, Off, Turbo)
-Zone number
-Control method (temperature control or percentage control)
-Current open percentage setting
-Setpoint temperature
-Sensor availability
-Current temperature
-Spill active/inactive status
-Low battery status
-AC Status (Message Type 0x23):
+## Files
 
-AC power state (On, Off, Away, Sleep)
-AC number
-AC mode (auto, heat, dry, fan, cool, auto heat, auto cool)
-AC fan speed (auto, quiet, low, medium, high, powerful, turbo, intelligent auto)
-Setpoint temperature
-Turbo, Bypass, and Spill status
-Timer status
-Current temperature
-Error code
-AC Ability (Message Type 0xFF 0x11):
+### zoneStatus0x21.js
 
-AC number
-AC Name
-Start zone number and zone count
-Supported modes (cool, fan, dry, heat, auto)
-Supported fan speeds (intelligent auto, turbo, powerful, high, medium, low, quiet, auto)
-Minimum and maximum setpoint for cool and heat modes
-AC Error Information (Message Type 0xFF 0x10):
+This script connects to an AirTouch 5 device over a TCP connection and sends a binary request to get the status of all zones. The status includes information such as power state, control method, open percentage, set point, temperature, spill, low battery, and more.
 
-AC number
-Error information length
-Error information (string)
-Zone Name (Message Type 0xFF 0x13):
+The script uses the `net` module to create a TCP client and connect to the AirTouch 5 device. It sends a binary request created by the `createZoneStatusRequest` function. When it receives data from the AirTouch 5 device, it parses the data using the `parseZoneStatus` function and logs the parsed data.
 
-Zone number
-Zone name length
-Zone name
-Console Version (Message Type 0xFF 0x30):
+### newRelicPost.js
 
-Update sign (indicates if the latest version is being used)
-Version string length
-Version details
+This script is a utility module that provides a function to post data to New Relic. It uses the `node-fetch` module to send a POST request to the New Relic API.
+
+The `postToNewRelic` function takes three parameters: the data to post, the API key, and the account ID. It compresses the data using gzip, then sends a POST request with the compressed data in the body. The `Content-Encoding` and `Content-Type` headers are set to `gzip` and `application/json` respectively.
+
+## Usage
+
+To run the application, you need to set the `HOST`, `PORT`, `API_KEY`, and `ACCOUNT_ID` variables in the `keys.json` file, then run the `zoneStatus0x21.js` script with Node.js:
+
+```bash
+node zoneStatus0x21.js

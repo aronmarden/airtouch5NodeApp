@@ -3,6 +3,7 @@
 **/*.ignore
 **/*backend/nr-security-home*
 **/key.json
+**/keys.json
 **/*.zip
 
 # misc
@@ -17,4 +18,4 @@
 **/package-lock.json
 **/yarn.lock
 **/build
-.ignoredir/syntheticscript.js
+archive.ignore/*
