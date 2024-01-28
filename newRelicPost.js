@@ -34,8 +34,7 @@ async function postToNewRelic(result, apiKey, accountId) {
         }
 
         return {
-            response: await response.text(),
-            data: data
+            response: await response.text()
         };
     } catch (error) {
         console.error('Error posting data to New Relic:', error);
